@@ -1,0 +1,489 @@
+{% extends 'mobsms/basic.html'%}
+
+{% block title %}{{phone}}{% endblock%}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mobsms/quickViewStyle.css' %}" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="back">
+<br>
+<div class="container py-3 my-container">
+    <div class='row'>
+        <div class="col-md-4 img-block">
+            <div class="row mx-2 pb-2">
+                <div class="col">
+                    <img src="{{phone.Front_image.url}}" class="imageview">
+                </div>
+            </div>
+            <div class='row mx-2 pt-2 pb-2' style = "border-top: solid 1px #d1d1d1">
+                <div class="col">
+                    <img src="{{phone.Back_image.url}}" class="imageview">
+                </div>
+            </div>
+            {% if phone.Other_image %}
+            <div class='row mx-2 pt-2 pb-2' style = "border-top: solid 1px #d1d1d1">
+                <div class="col">
+                    <img src="{{phone.Other_image.url}}" class="imageview">
+                </div>
+            </div>
+            
+            {% endif %}
+            {% if phone.Other_image2 %}
+            <div class='row mx-2 pt-2' style = "border-top: solid 1px #d1d1d1">
+                <div class="col">
+                    <img src="{{phone.Other_image2.url}}" class="imageview">
+                </div>
+            </div>
+            
+            {% endif %}
+        </div>
+        <div class="col-md-8 px-4 py-4" style="border-left: 1px solid #d1d1d1;">
+            <div class="row">
+                <div class="col-md-12 ">
+            <h3>{{phone.Brand}} {{phone.Model_name}}</h3>
+                </div></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong style="color:red">Price </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h3>RS. {{phone.Price}}</h3>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>In The Box </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.In_the_box}}.</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Brand </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Brand}}</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Model Name </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Model_name}}</h6>
+                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Model Number </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Model_number}}</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Color </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Color}}</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>SIM Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Sim_type}}</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Touchscreen </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{% if phone.Category == 'smart' %}Yes{% else %}No{% endif %}</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>OTG Compatible </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{% if phone.Otg_compatible == True %}Yes{% else %}No{% endif %}</h6>
+                    </div>
+            </div>
+            <div class = "row box pl-3 mr-3"><h3>Display Features</h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Display Size </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Display_size}} inch</h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Resolution </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Resolution}} </h6>
+                    </div>
+            </div>
+            {% if phone.Category == 'smart' %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Resolution Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Resolution_type}} </h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>GPU </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Gpu}} </h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Other Display Features </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Other_display_features}}. </h6>
+                    </div>
+            </div>
+            {% endif %}
+            {% if phone.Category == 'smart' %}
+            <div class = "row box pl-3 mr-3"><h3>Os & Processor Features</h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Operating System </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Operating_system}} </h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Processor Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Processor_type}} </h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Processor Core </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Processor_core}} </h6>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Primary Clock Speed </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Primary_clock_speed}} </h6>
+                    </div>
+            </div>
+            {% if phone.Secondary_clock_speed != 0.0 %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Secondery Clock Speed </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Secondary_clock_speed}} </h6>
+                    </div>
+            </div>
+            
+            {% endif %}
+            {% endif %}
+            <div class = "row box pl-3 mr-3"><h3>Memory & Storage Features</h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Internal Storage </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Internal_storage}} {% if phone.Category == 'basic' %}MB {% else %}GB {% endif %}</h6>
+                    </div>
+            </div>
+            {% if phone.Ram %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>RAM </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Ram}} {% if phone.Category == 'basic' %}MB {% else %}GB {% endif %}</h6>
+                    </div>
+            </div>
+            {% endif %}
+            {% if phone.Expandable_storage %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Expandable Storage </strong></h6>
+                </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Expandable_storage}} GB</h6>
+                </div>
+            </div>
+            {% endif %}
+            {% if phone.Supported_memorycard_type != '' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Supported Memory Card Type </strong></h6>
+                </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Supported_memorycard_type}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% if phone.Memorycard_type != '' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Memory Card Slot Type </strong></h6>
+                </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Memorycard_slot_type}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% if phone.primary_camera %}
+            <div class = "row box pl-3 mr-3"><h3>Camera Features</h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Primary Camera Available </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>Yes </h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Primary Camera </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Primary_camera}}</h6>
+                </div>
+            </div>
+            {% if phone.Category == 'smart' %}
+                        <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Primary Camera Features </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Primary_camera_features}}. </h6>
+                </div>
+            </div>
+
+            {% if phone.Secondary_camera != '' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Secondary Camera Available </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>YES</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Secondary Camera </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Secondary_camera}}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Secondary Camera Features </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Secondary_camera_features}}. </h6>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Flash </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Flash}} </h6>
+                </div>
+            </div>
+            {% if phone.Dual_camera_lense %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Dual Camera Lens </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Dual_camera_lens}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            <div class = "row box pl-3 mr-3"><h3>Connectivity Features </h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Supported Networks </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Supported_networks}} </h6>
+                </div>
+            </div>
+            {% if phone.Category == 'smart' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Internet Connectivity </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Internet_connectivity}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% if phone.Bluetooth == True %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Bluetooth Support </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>YES </h6>
+                </div>
+            </div>
+            {% if phone.Category == 'smart' or phone.Bluetooth_version %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Bluetooth Version </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Bluetooth_version}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% if phone.Audiojack == True %} 
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Audio Jack </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>3.5mm </h6>
+                </div>
+            </div>
+            {% endif %}
+            <div class = "row box pl-3 mr-3"><h3>Other Details </h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>SIM Size </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Sim_size}} </h6>
+                </div>
+            </div>
+            {% if phone.Category == 'basic' %}
+            {% if phone.Keypad_type %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Keypad Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Keypad_type}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% if phone.Category == 'smart' %}
+            {% if phone.Touchscreen_type %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Touchscreen Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Touchscreen_type}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% if phone.User_interface %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>User Interface </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.User_interface}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Removable Battery </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{% if phone.Nonremovable_battery != True %} YES {% else %}NO {% endif %}</h6>
+                </div>
+            </div>
+            {% if phone.Category == 'smart' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Weight </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Weight}} g</h6>
+                </div>
+            </div>
+            {% if phone.Sensors != '' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Sensors </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Sensors}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Other Features </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Other_features}} </h6>
+                </div>
+            </div>
+            {% endif %}
+            <div class = "row box pl-3 mr-3"><h3>Battery & Power Features </h3></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Battery Capacity </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Battery_capacity}} mAh</h6>
+                </div>
+            </div>
+            {% if phone.Battery_type != '' and phone.Category == 'smart' %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h6><strong>Battery Type </strong></h6>
+                    </div>
+                <div class="col-md-6">
+                    <h6>{{phone.Battery_type}} </h6>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <br>
+</div>
+        {% endblock %}

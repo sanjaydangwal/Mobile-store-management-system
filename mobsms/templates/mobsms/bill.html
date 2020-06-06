@@ -1,0 +1,123 @@
+{% extends 'mobsms/basic.html' %}
+
+{% block title%}Bill {% endblock %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mobsms/style.css' %}" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+
+
+{% block body %}
+<div class="back">
+    <br>
+    <div class="container my-container" id = 'print'>
+        <div id="bill-box">
+            <div class="row py-3 mx-1 border-bottom">
+                <div class="col-md-8">
+                    <span>
+                        <h3><i class="fas fa-mobile-alt"></i> Mobile Store Management System</h3>
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <span><strong>Address:</strong> Gumaniwala Rishikesh, 249204.</span><br>
+                    <span><strong>phone no.</strong> 7409761264</span>
+                </div>
+            </div>
+            <div class="row border-bottom mx-1 py-2">
+                <div class="col-md-9">
+                    <h6><strong>Customer Name </strong>:- {{full_name}}</h6>
+                    <h6><strong>Mobile no. </strong>:- {{phone_no}}</h6>
+                    <h6><strong>Email </strong>:- {{email}}</h6>
+                </div>
+                <div class="col-md-3">
+                    <h6><strong>Date : </strong>{{date|date:'d-M-Y'}}</h6>
+                    <h6><strong>Bill no. : </strong>{{id}}</h6>
+                </div>
+            </div>
+            <div class="row border-bottom mx-1">
+                <div class="col-md-2" style="text-align:center">
+                    <h6><strong>Serial No.</strong></h6>
+                </div>
+                <div class="col-md-8 border-left">
+                    <h6><strong>Description</strong></h6>
+                </div>
+                <div class="col-md-2 border-left" style="text-align:center">
+                    <h6><strong>Price</strong></h6>
+                </div>
+            </div>
+        </div>
+        <div class="row my-1 mx-2">
+            <div class="col-md-3" style="text-align: center">
+                <span>Customer signature</span><br><br>----------------------------------
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3" style="text-align: center">
+                <span>Customer Dealer</span><br><br>----------------------------------
+            </div>
+        </div>
+        
+        
+    </div>
+    <br>
+    <center>
+<button onclick="printBill()" class="btn btn-success">print</button>
+    </center>
+</div>
+<span id="cart_items" style="display: none">{{cart}}</span>
+{% endblock %}
+{% block js %}
+<script>
+    var cart_items = document.getElementById("cart_items").innerHTML;
+    cart_items = JSON.parse(cart_items);
+    console.log(cart_items);
+
+    var i = 1;
+    var total_price = 0;
+    for (var item in cart_items) {
+        let desc = cart_items[item][0];
+        let qty = cart_items[item][1];
+        let price = cart_items[item][2];
+        str = `<div class="row border-bottom mx-1">
+            <div class="col-md-2" style = "text-align:center">
+                <h6 class = "my-1"><strong>${i}.</strong></h6>
+            </div>
+            <div class="col-md-8 border-left">
+                <h6 class = "my-1">${desc}</h6>
+            </div>
+            <div class="col-md-2 border-left" >
+                <h6 class = "my-1">${qty} x ${price} = ${qty*price}</h6>
+            </div>
+        </div>`
+        $('#bill-box').append(str);
+        i += 1;
+        total_price += qty * price;
+    }
+    str = `<div class="row border-bottom mx-1">
+            <div class="col-md-2" style = "text-align:center">
+                <h5 class = "my-1"><strong>TOTAL PRICE</strong></h5>
+            </div>
+            <div class="col-md-8 border-left">
+                
+            </div>
+            <div class="col-md-2 border-left" >
+                <h5 class = "my-1"><strong>RS. ${total_price}</strong></h5>
+            </div>
+        </div>`
+    $('#bill-box').append(str);
+    clearCart();
+
+    function printBill() {
+        var temp = document.body.innerHTML;
+        //console.log(temp);
+        document.body.innerHTML = document.getElementById('print').innerHTML;
+        window.print();
+        document.body.innerHTML = temp;
+
+    }
+
+</script>
+{% endblock %}

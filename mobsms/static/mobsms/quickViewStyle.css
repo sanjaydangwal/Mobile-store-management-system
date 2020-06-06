@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+}
+
+
+body {
+    font-family: 'lato', 'arial', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    text-rendering: optimizeLegibility;
+}
+
+
+
+.back {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.69), rgba(0, 0, 0, 0.69)), url("back.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.back .my-container {
+    background-color: #ffffff;
+    margin: auto;
+    align-content: center;
+
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px #fff4e6;
+}
+
+
+.img-block {
+    text-align: center;
+}
+
+nav * {
+    color: white;
+}
+
+.imageview {
+    max-height: 350px;
+    max-width: 100%;
+}
+
+.box {
+    border-top: 1px solid #d1d1d1;
+}

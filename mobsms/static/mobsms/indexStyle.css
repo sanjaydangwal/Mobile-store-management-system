@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+    font-family: 'lato', 'arial', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    text-rendering: optimizeLegibility;
+}
+
+
+
+.back {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.69), rgba(0, 0, 0, 0.69)), url("back.jpg");
+    background-size: cover;
+    background-attachment:fixed;
+    height: 100%;
+}
+
+
+.back .hero-text {
+    color: #ffffff;
+    padding-top: 30px;
+    text-align: center;
+    font-family: 'Trade Winds', sans-serif;
+}
+
+.back .my-container {
+    background-color: rgba(201, 201, 201, 0);
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    border-radius: 15px;
+    /* background: linear-gradient(rgba(219, 4, 5, 0.59), rgba(0, 18, 211, 0.6));  */
+    box-shadow: 2px 2px 20px rgba(162, 161, 161, 0.89);
+}
+
+.card{
+    font-size: 95%;
+}
+
+/*------- slide show --------*/
+
+
+.col-md-3
+{
+display:inline-block;
+margin-left:-3px;
+margin-right:-3px;
+}
+
+.carousel-indicators .active {
+    background-color: blue;
+    
+}
+
+.carousel-indicators {
+    top:103%;
+    
+}
+
+.col-md-3 img {
+    width: 105px;
+    height: 190px;
+}
+
+body .carousel-indicator li {
+    background-color: blue;
+}
+
+body .carousel-indicators {
+    bottom: 0;
+}
+
+body .carousel-control-prev-icon,
+body .carousel-control-next-icon {
+    background-color: rgba(0, 0, 255, 0);
+    
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: auto;
+    bottom: auto;
+    padding-top: 222px;
+    
+}
+
+body .no-padding {
+    padding-left: 0,
+    padding-right: 0;
+}
+
+
+

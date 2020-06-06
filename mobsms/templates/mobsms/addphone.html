@@ -1,0 +1,69 @@
+{% extends 'mobsms/basic.html' %}
+
+{% block title%} Add Phone {% endblock %}
+{% load crispy_forms_tags %}
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mobsms/style.css' %}" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+
+
+{% block body %}
+<div class="back">
+    <br>
+    <div class="container my-container px-5">
+        <h3 class="pt-3">Add new Mobile</h3>
+        <form method="POST" enctype="multipart/form-data" class="py-2">
+            {% csrf_token %}
+            <h5>Type Of Moble</h5>
+            <div id="select phone" class = "form-group">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input radio" type="radio" name="select phone" id="smartRadio" value="smart" checked onclick="getForm()">
+                    <label class="form-check-label" for="smartRadio">Smart Phone</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input radio" type="radio" name="select phone" id="basicRadio" value="basic" onclick="getForm()">
+                    <label class="form-check-label" for="basicRadio">Basic Phone</label>
+                </div>
+            </div>
+            <fieldset class="form-group" style="font-size: 90%" id = "form">
+                {{s_form|crispy}}
+            </fieldset>
+
+            <div class="form-group">
+                <button class="btn btn-outline-info btn-block" type="submit">Add Mobile</button>
+            </div>
+        </form>
+    </div>
+    <br>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    {% if b_form.errors %}
+    document.getElementById('basicRadio').checked = true;
+    {% endif %}
+    function getForm(){
+        if (document.getElementById('smartRadio').checked){
+            document.getElementById("form").innerHTML = `{{s_form|crispy}}`;
+            document.getElementById('id_Category').value = 'smart';
+        }
+        else if (document.getElementById('basicRadio').checked){
+            document.getElementById("form").innerHTML = `{{b_form|crispy}}`;
+            document.getElementById('id_Category').value = 'basic';
+        }
+        document.getElementById("id_Author").value = {{user.id}};
+        document.getElementById("div_id_Author").style.display = "none";
+        document.getElementById("div_id_Category").style.display = "none";
+        document.getElementById("div_id_Date").style.display = "none";
+    }
+    getForm();
+    
+
+</script>
+{% endblock %}

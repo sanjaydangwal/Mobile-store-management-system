@@ -1,0 +1,30 @@
+{% extends 'mobsms/basic.html'%}
+{% block title %}Log In{% endblock %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mobsms/form.css' %}" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+{% endblock %}
+{% block body %}
+{% load crispy_forms_tags %}
+<div class = "back">
+    <div class="container-fluid">
+        <br>
+            <div class="form-box pb-3">
+               
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom py-2">Log In</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-grounp"><button class="btn btn-outline-info" type="submit">Log In</button></div>
+
+                </form>
+            </div>
+       <br>
+    </div>
+</div>
+
+{% endblock %}

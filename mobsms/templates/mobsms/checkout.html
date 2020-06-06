@@ -1,0 +1,89 @@
+{% extends 'mobsms/basic.html' %}
+{% block title%}Checkout {% endblock %}
+
+{% block links %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'mobsms/style.css' %}" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="back">
+    <br>
+    <div class="container my-container">
+        <div class="col py-2">
+            <h2>Step 1 - MSMS Express Checkout - Rview Your Cart Itmes</h2>
+            <ul class="list-group" id="checkout-content">
+            </ul>
+        </div>
+        <div class="col py-2">
+            <h2> Step 2 - Enter Customer Details</h2>
+            <form method="post">
+                {% csrf_token %}
+                <fieldset class="form-group" style="font-size: 90%">
+
+
+                    {{check_form|crispy}}
+
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info btn-block" type="submit" id = "submit">Checkout</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    function checkOutView(cart){
+    if ($.isEmptyObject(cart)) {
+        contentStr = `<h5 style = "color:red">Your cart is empty please add items to your cart before checking out!<h5>`;
+        $('#checkout-content').append(contentStr);
+        document.getElementById('checkout-content').innerHTML = contentStr;
+        $("#submit").prop("disabled", true);
+    } else {
+        contentStr = `<li class="list-group-item d-flex justify-content-between align-items-center" style = "background-color:#dedede;">
+                <span><h5 style = "font-weight:bold;color:red">ITEMS</h5></span>
+                <span class=""><h5 style = "font-weight:bold;color:red">PRICE</h5></span>
+            </li>`
+        $('#checkout-content').append(contentStr);
+        var total_price = 0;
+        for (var item in cart) {
+            let name = cart[item][0];
+            let qty = cart[item][1];
+            let price = cart[item][2];
+            contentStr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                ${name}
+                <div>    
+                <span>${qty} x ${price} = </span><span>${qty*price}</span>
+                </div>
+            </li>`
+            total_price += price*qty;
+            $('#checkout-content').append(contentStr);
+        }
+        contentStr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><h5 style = "color:red">TOTAL PRICE</h5></span>
+                <span class=""><h5 style = "color:red">RS. ${total_price}</h5></span>
+            </li>`
+        $('#checkout-content').append(contentStr);
+        document.getElementById('id_total_price').value = total_price;
+            
+    }
+    //document.getElementById('checkout-content').innerHTML = contentStr;
+    document.getElementById('id_cart').value = JSON.stringify(cart);
+    document.getElementById('div_id_cart').style.display = 'none';
+    
+    document.getElementById('div_id_total_price').style.display = 'none';
+    }
+    checkOutView(cart);
+</script>
+{% endblock %}

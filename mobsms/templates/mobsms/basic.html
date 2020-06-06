@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    <title>{% block title %} {% endblock %}</title>
+    <link href= "{% static 'mobsms/all.min.css'%}" rel="stylesheet">
+    <script defer src="{% static 'mobsms/all.min.js'%}"></script>
+    {% block links %}
+
+    {% endblock%}
+
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Trade Winds', sans-serif;"><i class="fas fa-mobile-alt" style="font-size:150% "></i> M S M S </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                {% if request.get_full_path == '/' %}
+                <form class="form-inline my-2 my-lg-0 mr-5" method="post">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" name = "search" type="search" placeholder="Search" style = "width: 340px">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                {% endif %}
+                
+                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+                {% if user.is_staff %}
+                <a class="nav-item nav-link {% if request.get_full_path == '/addphone/' %}active{% endif %}" href="{% url 'add phone' %}"><i class="fas fa-plus-circle"></i> Add Mobile</a>
+                {% endif %}
+                <a class="nav-item nav-link {% if request.get_full_path == '/profile/' %}active{% endif %}" href="{% url 'profile' %}"><img src="{{user.profile.image.url}}" style="height:30px;width:30px;border-radius: 50%;border: 1px solid #ffffff"> Profie</a>
+                {% if user.is_staff %}
+                <a class="nav-item nav-link {% if request.get_full_path == '/register/' %}active{% endif %}" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
+                {% endif %}
+                <button type="button" class="btn btn-secondary mx-2" data-html=true id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus."><i class="fab fa-opencart"></i>
+                    Cart(<span id="cart">0</span>)
+                </button>
+
+                <a class="nav-item nav-link {% if request.get_full_path == '/logout/' %}active{% endif %}" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                {% else %}
+                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link {% if request.get_full_path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Log In</a>
+
+                {% endif %}
+            </div>
+
+
+        </div>
+    </nav>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags}} alert-dismissible fade show my-0" role="alert">
+        {{ message }}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block body %} {% endblock %}
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script>
+        {% if request.get_full_path != '/logout/' %}
+        // find out the cart from local storage
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            updateCart(cart);
+        }
+        // update cart
+        function updateCart(cart) {
+            var sum = 0
+            for (var item in cart) {
+                sum += cart[item][1];     
+                {% if request.get_full_path == '/'  %}
+                try {
+                document.getElementById('div' + item).innerHTML = "<button id = 'minus" + item + "' class = 'btn btn-primary minus'>-</button><span id = 'val" + item + "'> " + cart[item][1] + "</span> <button id ='plus" + item + "' class = 'btn btn-primary plus'>+</button>"; }
+                 catch(err) {
+                     console.log(err.message)
+                }
+                {% endif %}
+            }
+            document.getElementById('cart').innerHTML = sum;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updatePopover(cart);
+        }
+        // update popover
+        function updatePopover(cart) {
+            popStr = "<h5>Cart for your items</h5><div class = 'mx-2 my-2'>";
+            var i = 1;
+            for (var item in cart) {
+                popStr = popStr + "<strong>" + i + ". </strong>" + cart[item][0].slice(0, 18) + ".  Qty: " + cart[item][1] + "<br>";
+                i++;
+            }
+            popStr += "</div>";
+            var check = JSON.stringify(cart).slice(0,2)
+            if (check !== '{}'){
+            popStr += "<a href = '{% url 'check out' %}'><button class = 'btn btn-primary id = 'checkOut'>Check Out</button></a><button class = 'btn btn-primary ml-2' id = 'clearCart' onclick = 'clearCart()'>Clear Cart</button>";}
+            document.getElementById('popcart').setAttribute('data-content', popStr); 
+            {% if request.get_full_path == '/' %}
+            $('#popcart').popover('show'); 
+            {% else %}
+            $('#popcart').popover(); 
+            {% endif %}
+        }
+             
+        function clearCart(){
+            cart = JSON.parse(localStorage.getItem('cart'));
+            for(var item in cart){
+                {% if request.get_full_path == '/' %}
+                try {
+                document.getElementById('div'+item).innerHTML = "<button id='" + item +"' class='btn btn-primary cart'>Add To Cart</button>";
+                }
+                 catch(err){
+                     console.log(err.message)
+                 }
+                {% endif %}
+            }
+            localStorage.clear();
+            cart = {};
+            $('#popcart').popover('hide');
+            updateCart(cart);
+            {% if request.get_full_path == '/checkout/'%}
+            checkOutView(cart);
+            {% endif %}
+        }
+    {% endif %}
+    </script>
+    
+    {% block js %}
+
+    {% endblock %}
+</body>
+
+</html>

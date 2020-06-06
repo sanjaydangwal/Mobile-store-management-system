@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'lato', 'arial', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    text-rendering: optimizeLegibility;
+     
+}
+
+h3{
+    color: #ffffff;
+}
+
+.back {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.69), rgba(0, 0, 0, 0.69)), url("back.jpg");
+    background-size: cover;
+    background-attachment:fixed;
+    height: 100vmax;
+    
+}
+
+
+
+.back .my-container {
+
+    margin: auto;
+    max-width: 400px;
+    align-content: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px #f0c282;
+}
+
+
+
+/*----------- registration form------------------*/
+
+
+.form-box {
+    max-width: 600px;
+    margin: auto;
+    font-size: 80%;
+    background-color: rgba(194, 211, 216, 0.9);
+    padding: 0 20px;
+    
+    border-radius: 15px;
+    box-shadow: 7px 7px 40px rgb(194, 211, 216);
+}
+
+.form-box *{
+    color: black;
+}
