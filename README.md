@@ -5,3 +5,5 @@
 4. install django crispy form using 
 5. pip install "django-crispy-forms"
 6. go to the project folder and run "python manage.py runserver" for Windows and for linux you can choose python3
+
+# all rights reserved 2020
