@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>{% block title %} {% endblock %}</title>
-    <link href= "{% static 'mobsms/all.min.css'%}" rel="stylesheet">
-    <script defer src="{% static 'mobsms/all.min.js'%}"></script>
+
     {% block links %}
 
     {% endblock%}
@@ -20,13 +19,22 @@
     {% block css %}
 
     {% endblock %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato&family=Raleway:ital,wght@1,300&display=swap');
+        font-family : 'Lato',
+        sans-serif;
+        }
 
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Trade Winds', sans-serif;"><i class="fas fa-mobile-alt" style="font-size:150% "></i> M S M S </a>
-        
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <a class="navbar-brand" href="{% url 'home' %}" style="font-family: 'Trade Winds', sans-serif;"><svg class="bi bi-phone" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M11 1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+  <path fill-rule="evenodd" d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg> M S M S </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,27 +44,49 @@
                 {% if request.get_full_path == '/' %}
                 <form class="form-inline my-2 my-lg-0 mr-5" method="post">
                     {% csrf_token %}
-                    <input class="form-control mr-sm-2" name = "search" type="search" placeholder="Search" style = "width: 340px">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" style="width: 340px">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        </svg></button>
                 </form>
                 {% endif %}
-                
-                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+
+                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><svg class="bi bi-house-door" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" />
+                        <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                    </svg> Home</a>
                 {% if user.is_staff %}
-                <a class="nav-item nav-link {% if request.get_full_path == '/addphone/' %}active{% endif %}" href="{% url 'add phone' %}"><i class="fas fa-plus-circle"></i> Add Mobile</a>
+                <a class="nav-item nav-link {% if request.get_full_path == '/addphone/' %}active{% endif %}" href="{% url 'add phone' %}"><svg class="bi bi-plus-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    </svg> Add Mobile</a>
                 {% endif %}
                 <a class="nav-item nav-link {% if request.get_full_path == '/profile/' %}active{% endif %}" href="{% url 'profile' %}"><img src="{{user.profile.image.url}}" style="height:30px;width:30px;border-radius: 50%;border: 1px solid #ffffff"> Profie</a>
                 {% if user.is_staff %}
-                <a class="nav-item nav-link {% if request.get_full_path == '/register/' %}active{% endif %}" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
+                <a class="nav-item nav-link {% if request.get_full_path == '/register/' %}active{% endif %}" href="{% url 'register' %}"><svg class="bi bi-person-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                    </svg> Register</a>
                 {% endif %}
-                <button type="button" class="btn btn-secondary mx-2" data-html=true id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus."><i class="fab fa-opencart"></i>
+                <button type="button" class="btn btn-light mx-2" data-html=true id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus."><svg class="bi bi-cart3" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    </svg>
                     Cart(<span id="cart">0</span>)
                 </button>
 
-                <a class="nav-item nav-link {% if request.get_full_path == '/logout/' %}active{% endif %}" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                <a class="nav-item nav-link {% if request.get_full_path == '/logout/' %}active{% endif %}" href="{% url 'logout' %}"><svg class="bi bi-box-arrow-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.354 11.354a.5.5 0 0 0 0-.708L1.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+                        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0 0 1h9a.5.5 0 0 0 .5-.5z" />
+                        <path fill-rule="evenodd" d="M14 13.5a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v1.5a.5.5 0 0 0 1 0V4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-1 0V12A1.5 1.5 0 0 0 7 13.5h7z" />
+                    </svg> Log Out</a>
                 {% else %}
-                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><i class="fas fa-home"></i> Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link {% if request.get_full_path == '/' %}active{% endif %}" href="{% url 'home' %}"><svg class="bi bi-house-door" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" />
+                        <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                    </svg> Home<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link {% if request.get_full_path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Log In</a>
 
                 {% endif %}
@@ -82,10 +112,42 @@ sagittis lacus vel augue laoreet rutrum faucibus."><i class="fab fa-opencart"></
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
+        var ColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+        function changeMode(ColorScheme){
+            if (ColorScheme == 'dark'){
+                $('nav').removeClass("navbar-light");
+                $('nav').removeClass("bg-light");
+                $('nav').addClass("navbar-dark");
+                $('nav').addClass("bg-dark");
+                $('#popcart').removeClass("btn-light");
+                $('#popcart').addClass("btn-dark");
+                $('.popover').addClass("bg-dark");
+                $('.popover-body').css("color","#ffffff");
+                
+                
+            }
+            else{
+                $('nav').removeClass("navbar-dark");
+                $('nav').removeClass("bg-dark");
+                $('nav').addClass("navbar-light");
+                $('nav').addClass("bg-light");
+                $('#popcart').removeClass("btn-dark");
+                $('#popcart').addClass("btn-light");
+                $('.popover').removeClass("bg-dark");
+                $('.popover-body').css("color","");
+            }
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        ColorScheme = e.matches ? "dark" : "light";
+            changeMode(ColorScheme);
+        });
+
+
         {% if request.get_full_path != '/logout/' %}
         // find out the cart from local storage
         if (localStorage.getItem('cart') == null) {
@@ -98,14 +160,12 @@ sagittis lacus vel augue laoreet rutrum faucibus."><i class="fab fa-opencart"></
         function updateCart(cart) {
             var sum = 0
             for (var item in cart) {
-                sum += cart[item][1];     
-                {% if request.get_full_path == '/'  %}
+                sum += cart[item][1]; {% if request.get_full_path == '/' %}
                 try {
-                document.getElementById('div' + item).innerHTML = "<button id = 'minus" + item + "' class = 'btn btn-primary minus'>-</button><span id = 'val" + item + "'> " + cart[item][1] + "</span> <button id ='plus" + item + "' class = 'btn btn-primary plus'>+</button>"; }
-                 catch(err) {
-                     console.log(err.message)
-                }
-                {% endif %}
+                    document.getElementById('div' + item).innerHTML = "<button id = 'minus" + item + "' class = 'btn btn-primary minus'>-</button><span id = 'val" + item + "'> " + cart[item][1] + "</span> <button id ='plus" + item + "' class = 'btn btn-primary plus'>+</button>";
+                } catch (err) {
+                    console.log(err.message)
+                } {% endif %}
             }
             document.getElementById('cart').innerHTML = sum;
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -120,40 +180,34 @@ sagittis lacus vel augue laoreet rutrum faucibus."><i class="fab fa-opencart"></
                 i++;
             }
             popStr += "</div>";
-            var check = JSON.stringify(cart).slice(0,2)
-            if (check !== '{}'){
-            popStr += "<a href = '{% url 'check out' %}'><button class = 'btn btn-primary id = 'checkOut'>Check Out</button></a><button class = 'btn btn-primary ml-2' id = 'clearCart' onclick = 'clearCart()'>Clear Cart</button>";}
-            document.getElementById('popcart').setAttribute('data-content', popStr); 
-            {% if request.get_full_path == '/' %}
-            $('#popcart').popover('show'); 
-            {% else %}
-            $('#popcart').popover(); 
-            {% endif %}
+            var check = JSON.stringify(cart).slice(0, 2)
+            if (check !== '{}') {
+                popStr += "<a href = '{% url 'check out' %}'><button class = 'btn btn-primary id = 'checkOut'>Check Out</button></a><button class = 'btn btn-primary ml-2' id = 'clearCart' onclick = 'clearCart()'>Clear Cart</button>";
+            }
+            document.getElementById('popcart').setAttribute('data-content', popStr); {% if request.get_full_path == '/' %}
+            $('#popcart').popover('show'); {% else %}
+            $('#popcart').popover(); {% endif %}
         }
-             
-        function clearCart(){
+
+        function clearCart() {
             cart = JSON.parse(localStorage.getItem('cart'));
-            for(var item in cart){
+            for (var item in cart) {
                 {% if request.get_full_path == '/' %}
                 try {
-                document.getElementById('div'+item).innerHTML = "<button id='" + item +"' class='btn btn-primary cart'>Add To Cart</button>";
-                }
-                 catch(err){
-                     console.log(err.message)
-                 }
-                {% endif %}
+                    document.getElementById('div' + item).innerHTML = "<button id='" + item + "' class='btn btn-primary cart'>Add To Cart</button>";
+                } catch (err) {
+                    console.log(err.message)
+                } {% endif %}
             }
             localStorage.clear();
             cart = {};
             $('#popcart').popover('hide');
-            updateCart(cart);
-            {% if request.get_full_path == '/checkout/'%}
-            checkOutView(cart);
-            {% endif %}
-        }
-    {% endif %}
+            updateCart(cart); {% if request.get_full_path == '/checkout/' %}
+            checkOutView(cart); {% endif %}
+        } {% endif %}
+changeMode(ColorScheme);
     </script>
-    
+
     {% block js %}
 
     {% endblock %}

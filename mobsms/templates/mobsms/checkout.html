@@ -20,7 +20,7 @@
         </div>
         <div class="col py-2">
             <h2> Step 2 - Enter Customer Details</h2>
-            <form method="post">
+            <form method="post" action = "/checkout/">
                 {% csrf_token %}
                 <fieldset class="form-group" style="font-size: 90%">
 
@@ -75,7 +75,7 @@
                 <span class=""><h5 style = "color:red">RS. ${total_price}</h5></span>
             </li>`
         $('#checkout-content').append(contentStr);
-        document.getElementById('id_total_price').value = total_price;
+     document.getElementById('id_total_price').value = total_price;
             
     }
     //document.getElementById('checkout-content').innerHTML = contentStr;

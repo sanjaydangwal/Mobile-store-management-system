@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from mobsms.models import Profile,checkout,basic,smart
-from django import forms
+
 class UserRegisterForms(UserCreationForm):
     email = forms.EmailField()
     class Meta:

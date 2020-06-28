@@ -57,3 +57,25 @@ h3{
 .form-box *{
     color: black;
 }
+
+/* DARK MODE */
+@media(prefers-color-scheme: light) {
+
+    .back .hero-text {
+        color: #000000;
+    }
+
+    .back {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.50)), url("back.jpg");
+    }
+
+    .carousel-indicators li {
+        background-color: #ffffff;
+
+    }
+
+    h3,h2 {
+        color: #000000;
+    }  
+}
+
